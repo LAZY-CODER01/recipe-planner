@@ -16,19 +16,19 @@ const StarRating = ({ rating }) => (
 
 const HeroSection = () => {
   return (
-    <div className="relative bg-white overflow-hidden">
+    <div className="relative bg-white overflow-hidden" style={{ fontFamily: "'IBM Plex Serif', serif" }}>
           <div className='z-0 absolute top-30 rotate-24 left-[-50px]'>
             <img src='https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png' alt='Leaf' className='w-60 h-80 left-0' />
           </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative z-10 py-16 sm:py-24 lg:py-32 flex flex-col lg:flex-row items-center">
-          =
+        <div className="relative z-10 py-8 sm:py-8 lg:py-16 flex flex-col lg:flex-row items-center">
+          
         
           <div className="lg:w-1/2 ml-36 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-800 tracking-tight leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-800 tracking-tight leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               SIMPLE AND <br /> TASTY RECIPES
             </h1>
-            <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto lg:mx-0">
+            <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto lg:mx-0" style={{ fontFamily: "Crimson Text, serif", fontWeight: 400, fontStyle: "bold" }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim eu nunc faucibus sit euismod suspendisse bibendum pellentesque lectus. Feugiat scelerisque montes.
             </p>
             <div className="mt-8 flex justify-center lg:justify-start">
@@ -50,15 +50,15 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 mt-4 lg:mt-0 flex justify-center lg:justify-end">
-            <div className="relative  w-full max-w-md lg:max-w-lg">
+          <div className="lg:w-[40%] right-[40px] flex  lg:justify-end">
+            <div className="relative right-18 w-full max-w-md lg:max-w-lg">
               <img 
                 src="https://res.cloudinary.com/drhcd0bj6/image/upload/v1759168141/thalis_yih7ek.png"
                 alt="Fruit bowl" 
                 className="rounded-3xl "
               />
 
-              <div className="absolute top-1/2 -translate-y-1/2 -left-4 sm:-left-12 bg-white rounded-lg shadow-xl p-3 flex items-center gap-3 animate-fade-in-up">
+              <div className="absolute top-30  -left-4 sm:-left-12 bg-white rounded-lg shadow-xl p-3 flex items-center gap-3 animate-fade-in-up">
                 <img className="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=4" alt="Search user" />
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Search 1 million+</p>
@@ -69,8 +69,8 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Floating Review Card */}
-              <div className="absolute bottom-24 sm:right-24 bg-white rounded-lg shadow-xl p-4 w-56 animate-fade-in-up animation-delay-3000">
+        
+              <div className="absolute bottom-4 sm:right-2 bg-white rounded-lg shadow-xl p-4 w-56 animate-fade-in-up animation-delay-3000">
                 <div className="flex items-center gap-3">
                   <img className="h-12 w-12 rounded-full" src="https://i.pravatar.cc/150?img=5" alt="Kylie Doe" />
                   <div>
