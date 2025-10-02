@@ -210,153 +210,151 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-50 to-blue-50 overflow-hidden">
-     <div className="relative bg-white overflow-hidden" style={{ fontFamily: "'IBM Plex Serif', serif" }}>
-        <div className='z-0 absolute top-30 rotate-24 left-[-50px] hidden sm:block'>
-          <img src='https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png' alt='Leaf' className='w-60 h-80 left-0' />
-        </div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative z-10 py-8 sm:py-8 lg:py-16 flex flex-col lg:flex-row items-center">
-          
-        
-          <div className="lg:w-1/2 ml-36 text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-800 tracking-tight leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
-              SIMPLE AND <br /> TASTY RECIPES
-            </h1>
-            <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto lg:mx-0" style={{ fontFamily: "Crimson Text, serif", fontWeight: 400, fontStyle: "bold" }}>
-             Your all-in-one solution for meal planning, recipe discovery, and smart shopping lists. 
-              Making cooking enjoyable for everyone.
-            </p>
-            
-            {/* --- SEARCH BAR (Replaces "Get Started" button) --- */}
-            <form onSubmit={handleSearch} className="mt-8 w-full max-w-lg mx-auto lg:mx-0">
-              <div className="relative flex items-center">
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search over 1 million recipes..."
-                  className="w-full pl-5 pr-28 py-4 border-2 border-gray-200 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 h-[85%] bg-green-500 text-white font-semibold rounded-full px-6 hover:bg-green-600 transition-colors duration-300 flex items-center"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
+    <section className="relative bg-gradient-to-br from-green-50 to-blue-50 overflow-hidden ">
+  <div className="relative bg-white" style={{ fontFamily: "'IBM Plex Serif', serif" }}>
+    
+    
+    <div className="absolute opacity-90 top-30 left-[-50px] rotate-12 hidden sm:block z-0">
+      <img 
+        src="https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png" 
+        alt="Leaf" 
+        className="w-40 sm:w-52 lg:w-60 h-auto"
+      />
+    </div>
 
-            {/* Quick Filter Buttons */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="text-sm text-gray-600 font-medium">Popular:</span>
-              {['Vegetarian', 'Quick & Easy', 'Italian', 'Healthy', 'Dessert'].map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => {
-                    setQuery(tag);
-                    navigate(`/search?q=${encodeURIComponent(tag)}`);
-                  }}
-                  className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-green-100 hover:text-green-700 transition-colors"
-                >
-                  {tag}
-                </button>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative sm:left-[100px] z-10 py-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+        
+        {/* LEFT: TEXT */}
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
+          <h1 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-gray-800 leading-tight"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            SIMPLE AND <br /> TASTY RECIPES
+          </h1>
+          <p 
+            className="mt-4 text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0"
+            style={{ fontFamily: "Crimson Text, serif", fontWeight: 400 }}
+          >
+            Your all-in-one solution for meal planning, recipe discovery, and smart shopping lists. 
+            Making cooking enjoyable for everyone.
+          </p>
+
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="mt-8 w-full max-w-lg mx-auto lg:mx-0">
+            <div className="relative flex items-center">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search over 1 million recipes..."
+                className="w-full pl-5 pr-28 py-3 sm:py-4 border-2 border-gray-200 rounded-full shadow-sm focus:ring-2 focus:ring-green-500"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-2 bg-green-500 text-white text-sm sm:text-base font-semibold rounded-full hover:bg-green-600 transition"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+
+          {/* Popular tags */}
+          <div className="mt-6 flex flex-wrap justify-center lg:justify-start gap-2">
+            <span className="text-sm text-gray-600 font-medium">Popular:</span>
+            {['Vegetarian', 'Quick & Easy', 'Italian', 'Healthy', 'Dessert'].map((tag) => (
+              <button
+                key={tag}
+                onClick={() => {
+                  setQuery(tag);
+                  navigate(`/search?q=${encodeURIComponent(tag)}`);
+                }}
+                className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-green-100 hover:text-green-700"
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-10 flex items-center justify-center lg:justify-start gap-3">
+            <div className="flex-shrink-0 p-2 border-2 border-gray-200 rounded-full">
+              <Heart size={22} className="text-red-500" />
+            </div>
+            <p className="text-sm text-gray-500 font-medium">PEOPLE LIKED THE RECIPES</p>
+            <div className="flex -space-x-2">
+              {[1,2,3].map(i => (
+                <img 
+                  key={i} 
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-white" 
+                  src={`https://i.pravatar.cc/150?img=${i}`} 
+                  alt={`User ${i}`} 
+                />
               ))}
             </div>
+          </div>
+        </div>
 
-            <div className="mt-12 flex items-center justify-center lg:justify-start gap-4">
-              <div className="flex-shrink-0 p-2 border-2 border-gray-200 rounded-full">
-                <Heart size={24} className="text-red-500" />
+        {/* RIGHT: IMAGE + overlays */}
+        <div className="w-full lg:w-[35%] flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+            <img 
+              src="https://res.cloudinary.com/drhcd0bj6/image/upload/v1759168141/thalis_yih7ek.png"
+              alt="Fruit bowl" 
+              className="rounded-3xl w-full h-auto"
+            />
+
+            {/* floating badge */}
+            <div className="absolute top-6 -left-4 sm:-left-10 bg-white rounded-lg shadow-md p-3 flex items-center gap-3">
+              <img className="h-8 w-8 rounded-full" src="https://i.pravatar.cc/150?img=4" alt="Search user" />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Search 1M+</p>
+                <p className="text-xs text-gray-500">simple recipes</p>
               </div>
-              <div className="text-sm text-gray-500 font-medium">PEOPLE LIKED THE RECIPES</div>
-              <div className="flex -space-x-2">
-                <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://i.pravatar.cc/150?img=1" alt="User 1" />
-                <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://i.pravatar.cc/150?img=2" alt="User 2" />
-                <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://i.pravatar.cc/150?img=3" alt="User 3" />
+              <div className="bg-green-100 p-1.5 rounded-full">
+                <CheckCircle size={18} className="text-green-500" />
               </div>
             </div>
-          </div>
 
-          <div className="lg:w-[40%] right-[40px] flex  lg:justify-end">
-            <div className="relative right-18 w-full max-w-md lg:max-w-lg">
-              <img 
-                src="https://res.cloudinary.com/drhcd0bj6/image/upload/v1759168141/thalis_yih7ek.png"
-                alt="Fruit bowl" 
-                className="rounded-3xl "
-              />
-
-              <div className="absolute top-30  -left-4 sm:-left-12 bg-white rounded-lg shadow-xl p-3 flex items-center gap-3 animate-fade-in-up">
-                <img className="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=4" alt="Search user" />
+            {/* bottom card */}
+            <div className="absolute bottom-3 right-2 sm:right-4 bg-white rounded-lg shadow-md p-3 w-48 sm:w-56">
+              <div className="flex items-center gap-3">
+                <img className="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=5" alt="Kylie Doe" />
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">Search 1 million+</p>
-                  <p className="text-xs text-gray-500">simple recipes</p>
-                </div>
-                <div className="bg-green-100 p-2 rounded-full">
-                  <CheckCircle size={20} className="text-green-500" />
+                  <p className="font-bold text-gray-900">Kylie Doe</p>
+                  <p className="text-sm text-gray-500">Food Enthusiast</p>
                 </div>
               </div>
-
-        
-              <div className="absolute bottom-4 sm:right-2 bg-white rounded-lg shadow-xl p-4 w-56 animate-fade-in-up animation-delay-3000">
-                <div className="flex items-center gap-3">
-                  <img className="h-12 w-12 rounded-full" src="https://i.pravatar.cc/150?img=5" alt="Kylie Doe" />
-                  <div>
-                    <p className="font-bold text-gray-900">Kylie Doe</p>
-                    <p className="text-sm text-gray-500">Food Enthusiast</p>
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <StarRating rating={5} />
-                </div>
+              <div className="mt-2">
+                <StarRating rating={5} />
               </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute top-4 right-4 h-3 w-3 bg-red-400 rounded-full"></div>
-              <div className="absolute top-12 left-4 h-2 w-2 bg-green-400 rounded-full"></div>
-              <div className="absolute bottom-4 left-1/4 h-3 w-3 bg-green-400 rounded-full"></div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Side Elements */}
-      <img 
-        src="https://www.freepnglogos.com/uploads/mint-png/mint-leaf-transparent-png-stickpng-28.png" // Replace with your mint leaf image
-        alt="Mint leaf" 
-        className="absolute top-0 -left-20 w-48 opacity-80 -z-0 hidden lg:block" 
-      />
-      <div className="absolute top-1/2 -translate-y-1/2 right-4 sm:right-8 hidden lg:flex flex-col items-center gap-6">
-        <span className="text-gray-500 font-semibold uppercase" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-          Follow Us
-        </span>
-        <div className="h-16 w-px bg-gray-300"></div>
-        <a href="#" className="text-gray-500 hover:text-gray-800"><Instagram size={20} /></a>
-        <a href="#" className="text-gray-500 hover:text-gray-800"><Twitter size={20} /></a>
-        <a href="#" className="text-gray-500 hover:text-gray-800"><Facebook size={20} /></a>
       </div>
     </div>
-      </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
-                    <Icon size={24} className="text-green-600" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900">{stat.number}</div>
-                  <div className="text-gray-600">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+    {/* Side leaf only on lg */}
+    <img 
+      src="https://www.freepnglogos.com/uploads/mint-png/mint-leaf-transparent-png-stickpng-28.png"
+      alt="Mint leaf" 
+      className="absolute top-0 -left-20 w-32 sm:w-40 lg:w-48 opacity-80 hidden lg:block" 
+    />
 
+    {/* Side social bar - only on lg */}
+    <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-6 hidden lg:flex flex-col items-center gap-4">
+      <span className="text-gray-500 font-semibold uppercase text-xs tracking-wider"
+        style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+        Follow Us
+      </span>
+      <div className="h-16 w-px bg-gray-300"></div>
+      <a href="#" className="text-gray-500 hover:text-gray-800"><Instagram size={18} /></a>
+      <a href="#" className="text-gray-500 hover:text-gray-800"><Twitter size={18} /></a>
+      <a href="#" className="text-gray-500 hover:text-gray-800"><Facebook size={18} /></a>
+    </div>
+  </div>
+</section>
       {/* Services Section */}
         <section className="relative py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
       {/* Decorative background elements */}
