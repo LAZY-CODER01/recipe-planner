@@ -224,7 +224,8 @@ const LandingPage = () => {
               SIMPLE AND <br /> TASTY RECIPES
             </h1>
             <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto lg:mx-0" style={{ fontFamily: "Crimson Text, serif", fontWeight: 400, fontStyle: "bold" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim eu nunc faucibus sit euismod suspendisse bibendum pellentesque lectus. Feugiat scelerisque montes.
+             Your all-in-one solution for meal planning, recipe discovery, and smart shopping lists. 
+              Making cooking enjoyable for everyone.
             </p>
             
             {/* --- SEARCH BAR (Replaces "Get Started" button) --- */}
