@@ -14,10 +14,11 @@ const Navbar = () => {
  
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/blog', label: 'Blog' },
-    { to: '/recipes', label: 'Recipes' },
-    { to: '/about', label: 'About' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/search?q=', label: 'Recipes' },
+    { to: '/meal-planner', label: 'Meal Planner' },
+    { to: '/shopping-list', label: 'Shopping List' },
+    { to: '/favorites', label: 'Favorites' },
+    { to: '/about', label: 'About & Help' },
   ];
 
 
@@ -33,15 +34,37 @@ const Navbar = () => {
               COOK<span className="text-green-500">ING</span>
             </span>
           </NavLink>
+          {/* User Menu */}
+          <div className="flex items-center gap-4">
             {currentUser ? (
-       
-          <>
-            <span>Welcome, {currentUser.displayName || currentUser.email}!</span>
-            <button onClick={handleSignOut}>Sign Out</button>
-          </>
-        ) : (
-          <NavLink to="/login">Login</NavLink>
-        )}
+              <div className="flex items-center gap-3">
+                <NavLink 
+                  to="/profile"
+                  className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-green-500 transition-colors"
+                >
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <span className="text-green-600 font-semibold">
+                      {(currentUser.displayName || currentUser.email || 'U').charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <span className="hidden sm:block">{currentUser.displayName || 'Profile'}</span>
+                </NavLink>
+                <button 
+                  onClick={handleSignOut}
+                  className="px-4 py-2 text-gray-600 hover:text-red-500 transition-colors"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <NavLink 
+                to="/login"
+                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
+                Login
+              </NavLink>
+            )}
+          </div>
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.to}>

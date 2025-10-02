@@ -4,23 +4,30 @@ import axios from 'axios';
 const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 const apiBaseUrl = 'https://api.spoonacular.com/recipes';
 
+
 /**
- * Searches for recipes based on a query.
+ * Searches for recipes based on a query with optional filters.
  * @param {string} query - The search term (e.g., "pasta", "chicken").
+ * @param {Object} filters - Optional filters for cuisine, diet, meal type, etc.
  * @returns {Promise<Array>} A promise that resolves to an array of recipes.
  */
-export const searchRecipes = async (query) => {
+export const searchRecipes = async (query, filters = {}) => {
   if (!apiKey) {
     console.error("API key is missing.");
     return [];
   }
   try {
+    const params = {
+      apiKey: apiKey,
+      query: query,
+      number: 12,
+      addRecipeInformation: true, // Get more detailed info
+      fillIngredients: true, // Include ingredient info
+      ...filters // Spread any additional filters
+    };
+
     const response = await axios.get(`${apiBaseUrl}/complexSearch`, {
-      params: {
-        apiKey: apiKey,
-        query: query,
-        number: 12, // Fetch 12 results
-      },
+      params,
     });
     return response.data.results;
   } catch (error) {

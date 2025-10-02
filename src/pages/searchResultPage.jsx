@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { searchRecipes } from '../api/spoonacular'; 
-import { RecipeCard } from '../components/recipecard'; 
+import { RecipeCard } from '../components/recipecard';
+import SearchFilters from '../components/SearchFilters'; 
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -10,30 +11,33 @@ const SearchResultsPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [filters, setFilters] = useState({});
+
+  const fetchSearchResults = async (searchQuery, searchFilters) => {
+    setLoading(true);
+    setError('');
+    const results = await searchRecipes(searchQuery, searchFilters);
+    if (results && results.length > 0) {
+      setRecipes(results);
+    } else {
+      setRecipes([]);
+      setError(`No recipes found for "${searchQuery}" with the selected filters. Please try adjusting your search.`);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-   
     if (query) {
-      const fetchSearchResults = async () => {
-        setLoading(true);
-        setError('');
-        const results = await searchRecipes(query);
-        if (results && results.length > 0) {
-          setRecipes(results);
-        } else {
-          setRecipes([]);
-          setError(`No recipes found for "${query}". Please try another search term.`);
-        }
-        setLoading(false);
-      };
-
-      fetchSearchResults();
+      fetchSearchResults(query, filters);
     } else {
-    
       setError('Please enter a search term on the home page to see results.');
       setLoading(false);
     }
-  }, [query]);
+  }, [query, filters]);
+
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
 
   if (loading) {
     return <div className="text-center p-12 text-lg font-semibold">Searching for "{query}"...</div>;
@@ -41,9 +45,27 @@ const SearchResultsPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
-      <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-8">
-        Search Results for: <span className="text-green-600">"{query}"</span>
-      </h1>
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-4 md:mb-0">
+          Search Results for: <span className="text-green-600">"{query}"</span>
+        </h1>
+        
+        {/* Filters */}
+        <div className="flex items-center gap-4">
+          <SearchFilters 
+            onFiltersChange={handleFiltersChange} 
+            activeFilters={filters}
+          />
+        </div>
+      </div>
+
+      {/* Results Count */}
+      {recipes.length > 0 && (
+        <p className="text-gray-600 mb-6">
+          Found {recipes.length} recipe{recipes.length !== 1 ? 's' : ''}
+        </p>
+      )}
 
       {error && (
         <div className="text-center py-10 bg-red-50 p-6 rounded-lg">

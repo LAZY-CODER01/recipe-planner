@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Heart, Star, Instagram, Twitter, Facebook, Search, CheckCircle } from 'lucide-react';
+import { ArrowRight, Heart, Star, Instagram, Twitter, Facebook, Search, CheckCircle, Filter } from 'lucide-react';
 
 // A small component for the star ratings
 const StarRating = ({ rating }) => (
@@ -62,6 +62,23 @@ const HeroSection = () => {
                 </button>
               </div>
             </form>
+
+            {/* Quick Filter Buttons */}
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="text-sm text-gray-600 font-medium">Popular:</span>
+              {['Vegetarian', 'Quick & Easy', 'Italian', 'Healthy', 'Dessert'].map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => {
+                    setQuery(tag);
+                    navigate(`/search?q=${encodeURIComponent(tag)}`);
+                  }}
+                  className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-green-100 hover:text-green-700 transition-colors"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
 
             <div className="mt-12 flex items-center justify-center lg:justify-start gap-4">
               <div className="flex-shrink-0 p-2 border-2 border-gray-200 rounded-full">
