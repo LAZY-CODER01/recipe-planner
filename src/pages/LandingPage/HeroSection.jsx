@@ -1,4 +1,5 @@
- import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Heart, Star, Instagram, Twitter, Facebook, Search, CheckCircle } from 'lucide-react';
 
 // A small component for the star ratings
@@ -15,11 +16,22 @@ const StarRating = ({ rating }) => (
 );
 
 const HeroSection = () => {
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      // Navigate to a search results page, passing the query as a URL parameter
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   return (
     <div className="relative bg-white overflow-hidden" style={{ fontFamily: "'IBM Plex Serif', serif" }}>
-          <div className='z-0 absolute top-30 rotate-24 left-[-50px]'>
-            <img src='https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png' alt='Leaf' className='w-60 h-80 left-0' />
-          </div>
+        <div className='z-0 absolute top-30 rotate-24 left-[-50px]'>
+          <img src='https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png' alt='Leaf' className='w-60 h-80 left-0' />
+        </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10 py-8 sm:py-8 lg:py-16 flex flex-col lg:flex-row items-center">
           
@@ -31,12 +43,26 @@ const HeroSection = () => {
             <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto lg:mx-0" style={{ fontFamily: "Crimson Text, serif", fontWeight: 400, fontStyle: "bold" }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim eu nunc faucibus sit euismod suspendisse bibendum pellentesque lectus. Feugiat scelerisque montes.
             </p>
-            <div className="mt-8 flex justify-center lg:justify-start">
-              <a href="#" className="inline-flex items-center justify-center px-8 py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-colors duration-300 transform hover:scale-105">
-                Get Started
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-            </div>
+            
+            {/* --- SEARCH BAR (Replaces "Get Started" button) --- */}
+            <form onSubmit={handleSearch} className="mt-8 w-full max-w-lg mx-auto lg:mx-0">
+              <div className="relative flex items-center">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search over 1 million recipes..."
+                  className="w-full pl-5 pr-28 py-4 border-2 border-gray-200 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 h-[85%] bg-green-500 text-white font-semibold rounded-full px-6 hover:bg-green-600 transition-colors duration-300 flex items-center"
+                >
+                  Search
+                </button>
+              </div>
+            </form>
+
             <div className="mt-12 flex items-center justify-center lg:justify-start gap-4">
               <div className="flex-shrink-0 p-2 border-2 border-gray-200 rounded-full">
                 <Heart size={24} className="text-red-500" />

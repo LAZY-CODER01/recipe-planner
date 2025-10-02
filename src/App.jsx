@@ -1,19 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './components/navbar'
-import HeroSection from './pages/LandingPage/HeroSection'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/navbar.jsx';
+import HeroSection from './pages/LandingPage/HeroSection.jsx';
+import AuthPage from './pages/login/signup.jsx';
+import SearchResultsPage from './pages/searchResultPage.jsx';
+
+import RecipeDetailPage from './pages/RecipeDetailPage.jsx'; 
+import FavoritesPage from './pages/FavoritePage.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-     <Navbar />
-     <HeroSection />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/login" element={<AuthPage />} />
+        <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+        <Route path='/favorites' element={<FavoritesPage />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

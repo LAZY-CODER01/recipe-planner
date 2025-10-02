@@ -2,14 +2,16 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom' // <-- 1. IMPORT IT
+import { BrowserRouter } from 'react-router-dom' 
 import App from './App.jsx'
 import './index.css'
-
+import './store/authStore';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>  {/* <-- 2. WRAP YOUR APP */}
+    <BrowserRouter>  
+     
       <App />
-    </BrowserRouter> {/* <-- 3. CLOSE THE WRAPPER */}
+    
+    </BrowserRouter> 
   </React.StrictMode>,
 )

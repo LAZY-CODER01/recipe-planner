@@ -1,12 +1,17 @@
-// src/components/Navbar.tsx
 
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UtensilsCrossed, LayoutGrid, X } from 'lucide-react';
+import { signOut } from 'firebase/auth';
+import { auth } from '../config/firebase';
+import { useAuthStore } from '../store/authStore';
 
 const Navbar = () => {
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const loading = useAuthStore((state) => state.loading);
+  const handleSignOut = useAuthStore((state) => state.handleSignOut);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+ 
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/blog', label: 'Blog' },
@@ -14,6 +19,7 @@ const Navbar = () => {
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
   ];
+
 
   return (
     <nav className="bg-white shadow-sm">
@@ -27,6 +33,15 @@ const Navbar = () => {
               COOK<span className="text-green-500">ING</span>
             </span>
           </NavLink>
+            {currentUser ? (
+       
+          <>
+            <span>Welcome, {currentUser.displayName || currentUser.email}!</span>
+            <button onClick={handleSignOut}>Sign Out</button>
+          </>
+        ) : (
+          <NavLink to="/login">Login</NavLink>
+        )}
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.to}>
