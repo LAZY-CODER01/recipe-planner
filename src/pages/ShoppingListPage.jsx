@@ -25,7 +25,7 @@ const ShoppingListPage = () => {
   const [newItemText, setNewItemText] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
-
+// error resolving debugging
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
