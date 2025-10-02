@@ -11,6 +11,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { toast } from 'react-toastify';
 
 // Sortable meal item component
 const SortableMealItem = ({ item, onRemove }) => {
@@ -142,8 +143,19 @@ const MealPlannerPage = () => {
 
   const handleRemove = async (mealPlanDocId) => {
     if (!currentUser) return;
-    await removeRecipeFromMealPlan(mealPlanDocId);
-    fetchMealPlan(currentUser.uid); // Re-fetch to update the view
+    try {
+      await removeRecipeFromMealPlan(mealPlanDocId);
+      toast.success('Recipe removed from meal plan successfully!', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      fetchMealPlan(currentUser.uid); // Re-fetch to update the view
+    } catch (error) {
+      toast.error('Failed to remove recipe from meal plan. Please try again.', {
+        position: "top-right",
+        autoClose: 4000,
+      });
+    }
   };
 
   // Calculate nutrition data
@@ -229,8 +241,15 @@ const MealPlannerPage = () => {
         
         // Refresh the meal plan
         fetchMealPlan(currentUser.uid);
+        toast.success('Recipe moved successfully!', {
+          position: "top-right",
+          autoClose: 2000,
+        });
       } catch (error) {
-        console.error('Error moving meal:', error);
+        toast.error('Failed to move recipe. Please try again.', {
+          position: "top-right",
+          autoClose: 4000,
+        });
       }
     }
   };
@@ -284,6 +303,10 @@ const MealPlannerPage = () => {
     });
 
     doc.save('meal-plan.pdf');
+    toast.success('Meal plan exported to PDF successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   const exportToCSV = () => {
@@ -318,6 +341,10 @@ const MealPlannerPage = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    toast.success('Meal plan exported to CSV successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   if (loading) {

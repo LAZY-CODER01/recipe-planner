@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { auth } from '../config/firebase'; 
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 export const useAuthStore = create((set) => ({
   currentUser: null,
@@ -14,9 +15,15 @@ export const useAuthStore = create((set) => ({
     try {
       await signOut(auth);
       set({ currentUser: null });
-      console.log("User signed out successfully");
+      toast.success("You have been signed out successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     } catch (error) {
-      console.error("Error signing out:", error);
+      toast.error("Error signing out. Please try again.", {
+        position: "top-right",
+        autoClose: 4000,
+      });
     }
   },
 }));

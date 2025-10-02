@@ -5,6 +5,7 @@ import { auth } from '../config/firebase';
 import { getRecipeDetails } from '../api/spoonacular'; 
 import { addRecipeToFavorites, addRecipeToMealPlan } from '../config/FirebaseUtillities'; 
 import { Heart, Calendar, Share2, Copy, Facebook, Twitter, Instagram, Link2, Check } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -57,7 +58,10 @@ const RecipeDetailPage = () => {
 
   const handleAddToMealPlan = () => {
     if (!currentUser) {
-      alert("Please log in to add recipes to your meal plan.");
+      toast.error("Please log in to add recipes to your meal plan.", {
+        position: "top-right",
+        autoClose: 4000,
+      });
       navigate('/login');
       return;
     }
@@ -75,11 +79,16 @@ const RecipeDetailPage = () => {
 
     try {
       await addRecipeToMealPlan(currentUser.uid, selectedDate, selectedMealType, recipeToSave);
-      alert(`${recipe.title} was added to your ${selectedMealType} on ${selectedDate}!`);
+      toast.success(`${recipe.title} was added to your ${selectedMealType} on ${selectedDate}!`, {
+        position: "top-right",
+        autoClose: 4000,
+      });
       setShowMealPlanModal(false);
     } catch (error) {
-      console.error('Error adding to meal plan:', error);
-      alert('Error adding to meal plan. Please try again.');
+      toast.error('Error adding to meal plan. Please try again.', {
+        position: "top-right",
+        autoClose: 5000,
+      });
     }
   };
 
@@ -93,6 +102,10 @@ const RecipeDetailPage = () => {
     try {
       await navigator.clipboard.writeText(currentUrl);
       setLinkCopied(true);
+      toast.success('Recipe link copied to clipboard!', {
+        position: "top-right",
+        autoClose: 2000,
+      });
       setTimeout(() => setLinkCopied(false), 2000);
     } catch (err) {
       // Fallback for browsers that don't support clipboard API
@@ -103,6 +116,10 @@ const RecipeDetailPage = () => {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       setLinkCopied(true);
+      toast.success('Recipe link copied to clipboard!', {
+        position: "top-right",
+        autoClose: 2000,
+      });
       setTimeout(() => setLinkCopied(false), 2000);
     }
   };

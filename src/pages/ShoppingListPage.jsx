@@ -14,6 +14,7 @@ import {
   Search,
   Filter
 } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const ShoppingListPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -157,14 +158,31 @@ const ShoppingListPage = () => {
       };
       setManualItems([...manualItems, newItem]);
       setNewItemText('');
+      toast.success(`"${newItem.name}" added to shopping list!`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } else {
+      toast.error('Please enter an item name', {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
   const handleRemoveManualItem = (itemId) => {
+    const itemToRemove = manualItems.find(item => item.id === itemId);
     setManualItems(manualItems.filter(item => item.id !== itemId));
     const newChecked = new Set(checkedItems);
     newChecked.delete(itemId);
     setCheckedItems(newChecked);
+    
+    if (itemToRemove) {
+      toast.success(`"${itemToRemove.name}" removed from shopping list!`, {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    }
   };
 
   const exportToPrint = () => {
@@ -208,6 +226,10 @@ const ShoppingListPage = () => {
     `);
     printWindow.document.close();
     printWindow.print();
+    toast.success('Shopping list sent to printer!', {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   const exportToText = () => {
@@ -229,6 +251,10 @@ const ShoppingListPage = () => {
     link.download = 'shopping-list.txt';
     link.click();
     URL.revokeObjectURL(url);
+    toast.success('Shopping list exported successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
   if (loading) {

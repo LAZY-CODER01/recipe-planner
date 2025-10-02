@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './components/navbar.jsx';
 import HeroSection from './pages/LandingPage/HeroSection.jsx';
@@ -29,6 +31,22 @@ function App() {
         <Route path='/profile' element={<ProfileSettingsPage />} />
         <Route path='/about' element={<AboutHelpPage />} />
       </Routes>
+      
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        toastClassName="custom-toast"
+        bodyClassName="custom-toast-body"
+      />
     </>
   );
 }
