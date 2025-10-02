@@ -19,7 +19,7 @@ const RecipeDetailPage = () => {
   const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
-   
+//    check
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
     });
