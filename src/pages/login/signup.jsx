@@ -3,6 +3,9 @@ import LoginForm from '../../components/LoginForm';
 import SignUpForm from '../../components/sign-up'; 
 import GoogleSignInButton from '../../components/googlesignin';
 import { ChefHat, Utensils } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
+
+
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +13,7 @@ const AuthPage = () => {
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
   };
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -59,9 +63,13 @@ const AuthPage = () => {
             {/* Auth Forms */}
             <div className="transition-all duration-300">
               {isLogin ? (
-                <LoginForm onToggleToSignup={() => setIsLogin(false)} />
+                <LoginForm onToggleToSignup={() => setIsLogin(false)}
+                    onSuccess={() => navigate("/")}
+                />
               ) : (
-                <SignUpForm onToggleToLogin={() => setIsLogin(true)} />
+                <SignUpForm onToggleToLogin={() => setIsLogin(true)}
+                    onSuccess={() => navigate("/")}
+                />
               )}
             </div>
 

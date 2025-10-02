@@ -5,9 +5,11 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Loader } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const GoogleSignInButton = ({ className = "" }) => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -42,7 +44,9 @@ const GoogleSignInButton = ({ className = "" }) => {
         toast.success(`Welcome back, ${user.displayName}!`, {
           position: "top-right",
           autoClose: 3000,
-        });
+        })
+        navigate("/");
+        ;
       }
 
     } catch (error) {

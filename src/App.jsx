@@ -22,6 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HeroSection />} />
+    
         <Route path="/login" element={<AuthPage />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/recipe/:id" element={<RecipeDetailPage />} />

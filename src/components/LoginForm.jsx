@@ -3,6 +3,7 @@ import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Eye, EyeOff, Mail, Lock, Loader } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ onToggleToSignup }) => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const LoginForm = ({ onToggleToSignup }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,8 +23,9 @@ const LoginForm = ({ onToggleToSignup }) => {
       toast.success('Welcome back! You have successfully signed in.', {
         position: "top-right",
         autoClose: 3000,
+
       });
-      // Navigation will be handled by AuthContext/routing
+      navigate("/");
     } catch (err) {
       // Provide user-friendly error messages
       let errorMessage = 'An error occurred. Please try again.';

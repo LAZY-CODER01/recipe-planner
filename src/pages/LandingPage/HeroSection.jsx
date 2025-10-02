@@ -210,9 +210,9 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-50 to-blue-50 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-green-50 to-blue-50 overflow-hidden flex items-center">
      <div className="relative bg-white overflow-hidden" style={{ fontFamily: "'IBM Plex Serif', serif" }}>
-        <div className='z-0 absolute top-30 rotate-24 left-[-50px]'>
+        <div className='z-0 absolute top-30 rotate-24 left-[-50px] hidden sm:block'>
           <img src='https://res.cloudinary.com/drhcd0bj6/image/upload/v1759162127/mints_sgsvzb.png' alt='Leaf' className='w-60 h-80 left-0' />
         </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
