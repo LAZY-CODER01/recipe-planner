@@ -47,7 +47,7 @@ const Navbar = () => {
 
   const navLinks = [
     { to: '/', label: 'Home', icon: Home },
-    { to: '/search?q=', label: 'Recipes', icon: Search },
+  
     { to: '/meal-planner', label: 'Meal Planner', icon: Calendar },
     { to: '/shopping-list', label: 'Shopping List', icon: ShoppingCart },
     { to: '/favorites', label: 'Favorites', icon: Heart },

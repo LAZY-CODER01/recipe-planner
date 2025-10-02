@@ -558,11 +558,11 @@ const LandingPage = () => {
                       
                       {/* Icon */}
                       <div className={`
-                        relative w-20 h-20 ${feature.bgColor} 
+                        relative w-20 h-20  
                         rounded-2xl flex items-center justify-center
                         transition-all duration-500 ease-out
                         ${isHovered ? 'scale-110 rotate-6' : 'scale-100 rotate-0'}
-                        shadow-lg ${isHovered ? feature.shadowColor : ''}
+                        shadow-lg ${isHovered ? feature.shadowColor : 'black/10'}
                       `}>
                         <div className={`
                           absolute inset-0 bg-gradient-to-br ${feature.color} 
@@ -574,7 +574,7 @@ const LandingPage = () => {
                           size={36} 
                           className={`
                             relative z-10 transition-all duration-500
-                            ${isHovered ? 'text-transparent bg-gradient-to-br ' + feature.color + ' bg-clip-text scale-110' : 'text-gray-700'}
+                            ${isHovered ? ' bg-gradient-to-br ' + feature.color + ' bg-clip-text scale-110' : 'text-gray-700'}
                           `}
                           strokeWidth={2}
                         />
