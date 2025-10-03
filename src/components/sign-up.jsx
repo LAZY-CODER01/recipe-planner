@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Eye, EyeOff, Mail, Lock, User, Loader, Check } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpForm = ({ onToggleToLogin }) => {
   const [name, setName] = useState('');
@@ -15,6 +16,7 @@ const SignUpForm = ({ onToggleToLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const navigate = useNavigate();
 
   // Password strength validation
   const getPasswordStrength = (password) => {
@@ -90,6 +92,7 @@ const SignUpForm = ({ onToggleToLogin }) => {
       setPassword('');
       setConfirmPassword('');
       setAcceptTerms(false);
+        navigate("/");
 
     } catch (err) {
       // Provide user-friendly error messages
